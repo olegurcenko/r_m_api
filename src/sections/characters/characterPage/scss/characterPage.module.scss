@@ -1,0 +1,18 @@
+.fullPage {
+	padding-top: 80px;
+	max-width: 1200px;
+	margin-inline: auto;
+	background-color: #e3f6f5;
+	color: #272643;
+	.topInfo {
+		display: flex;
+		align-items: center;
+			.photoCard {
+			max-width: 500px;
+			width: 100%;
+			img {
+				width: 100%;
+			}
+		}
+	}
+}

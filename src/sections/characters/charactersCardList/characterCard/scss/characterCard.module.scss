@@ -1,0 +1,90 @@
+.characterCard {
+	display: flex;
+	flex-direction: column;
+	width: 350px;
+	border: 1px solid #010101;
+	background-color: #bae8e8;
+	box-sizing: border-box;
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px;
+	z-index: 1;
+  
+	.infoBlock {
+	  display: flex;
+	  justify-content: space-between;
+  
+	  .alive {
+		color: green;
+		font-size: 20px;
+	  }
+  
+	  .dead {
+		color: red;
+		font-size: 20px;
+	  }
+  
+	  .unknown {
+		color: grey;
+		font-size: 20px;
+		font-weight: 900px;
+		font-family: sans-serif;
+	  }
+  
+	  .fullLink {
+		img {
+		  width: 30px;
+		}
+	  }
+	}
+  
+	.avatar {
+	  position: relative;
+	  display: inline-block;
+  
+	  &Image {
+		display: block;
+		width: 100%;
+		height: auto;
+	  }
+  
+	  &:hover {
+		.textOnPhoto {
+		  transform: translateY(-150px);
+		  opacity: 1;
+		}
+  
+		&::before {
+		  opacity: 1;
+		}
+	  }
+  
+	  .textOnPhoto {
+		position: absolute;
+		text-align: center;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+		color: white;
+		opacity: 0;
+		z-index: 1;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+	  }
+  
+	  &::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.8);
+		z-index: 0;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	  }
+	}
+  }
+  
