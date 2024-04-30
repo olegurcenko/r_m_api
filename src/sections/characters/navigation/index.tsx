@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import styles from './navigation.module.scss'
 
 export const NavigationBlock: React.FC = () => {
 	const location = useLocation();
@@ -12,14 +13,14 @@ export const NavigationBlock: React.FC = () => {
 	  }
 	}
 	return (
-		<section>
+		<section className={styles.navigationBlock}>
 			{number > 1 ? 
-				<Link to={`/characters?page=${number - 1}`}>{'<'}</Link>
+				<Link className={styles.navigateButton} to={`/characters?page=${number - 1}`}>{'<'}</Link>
 			: 
-				<span>{'<'}</span>	
+				<span className={styles.navigateButtonOff}>{'<'}</span>	
 			}
 			<p>{`${pageNumber}`}</p>
-			<Link to={`/characters?page=${number + 1}`}>{'>'}</Link>
+			<Link className={styles.navigateButton} to={`/characters?page=${number + 1}`}>{'>'}</Link>
 		</section>
 	)
 }
