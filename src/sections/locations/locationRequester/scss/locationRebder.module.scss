@@ -1,0 +1,19 @@
+.cardLocation {
+	position: relative;
+	top: 90px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 350px;
+	background-color: #bae8e8;
+	box-sizing: border-box;
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px;
+	z-index: 1;
+	height: 300px;
+	font-size: 16px;
+	color: #272643;
+	text-decoration: none;
+}

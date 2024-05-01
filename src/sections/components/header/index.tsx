@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
 	<section className={styles.header}>
     	<section className={styles.headerWrapper}>
     	  <Link className={activeClasses.characters} to='/characters?page=1'>Characters</Link>
-    	  <Link className={activeClasses.locations} to='/locations'>Locations</Link>
+    	  <Link className={activeClasses.locations} to='/locations?page=1'>Locations</Link>
     	  <Link className={activeClasses.episodes} to='/episodes'>Episodes</Link>
     	</section>
 	</section>

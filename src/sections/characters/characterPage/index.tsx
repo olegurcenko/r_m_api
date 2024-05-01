@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from './scss/characterPage.module.scss'
-import { statSync } from "fs";
 
 export const CharacterPage: React.FC = () => {
 	const [data, setData] = useState<any>(null);
@@ -53,9 +52,9 @@ export const CharacterPage: React.FC = () => {
 							<p className={styles.name}>{data.name}</p>
 							<Link className={styles.location} to={''}><img src="https://cdn-icons-png.flaticon.com/512/535/535239.png" alt="" />{data.location.name}</Link>
 						</li>
-						<li className={styles.species}>{data.species} {data.type === '' ? '' : data.type} {data.gender === 'Male' ? <img className={styles.gender} src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Male_symbol_-_black.png"/> : (data.gender === 'Female' ? <img className={styles.gender} src="https://static.vecteezy.com/system/resources/previews/024/044/538/original/women-sign-gender-free-png.png"/> : <></>)}</li>
+						<li className={styles.species}>{data.species} {data.type === '' ? '' : data.type} {data.gender === 'Male' ? <img className={styles.gender} src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Male_symbol_-_black.png" alt={data.gender}/> : (data.gender === 'Female' ? <img className={styles.gender} src="https://static.vecteezy.com/system/resources/previews/024/044/538/original/women-sign-gender-free-png.png" alt={data.gender}/> : <></>)}</li>
 						<li className={styles.status}>{data.status === 'Alive' ? <p className={styles.alive}>Alive</p> : (data.status === 'Dead' ? <p className={styles.dead}>Dead</p> : <p className={styles.unknown}>Unknown</p>)}</li>
-						{/*<li>Gender: {data.gender}</li>*/}
+						<li className={styles.origin}>{data.origin.name === 'unknown' ? <></> : `Origin: ${data.origin.name}`}</li>
 					</ul>
 				</section>
 			</section>
