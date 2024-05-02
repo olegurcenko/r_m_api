@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from './scss/locationRebder.module.scss';
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface LocationPorps {
 	url: string
 }
 
- export interface LocationData {
+export interface LocationData {
 	id: number
 	name: string
 	type: string
@@ -44,7 +44,7 @@ export const LocationRender: React.FC<LocationPorps> = ({url}) => {
 	
 	console.log(data)
 	return (
-			<Link to={''} className={styles.cardLocation}>
+			<Link to={`/location?id=${data?.id}`} className={styles.cardLocation}>
 				{data?.name}
 			</Link>
 	)

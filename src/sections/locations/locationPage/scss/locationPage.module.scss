@@ -1,0 +1,62 @@
+.locationPage {
+	max-width: 1200px;
+	margin-inline: auto;
+	background-color: #e3f6f5;
+	color: #272643;
+	height: 100%;
+	position: relative;
+	top: 70px;
+
+	.planetName {
+		margin: 0;
+		padding: 0;
+		margin-left: 1rem;
+		font-size: 36px;
+	}
+
+	.planetData {
+		font-size: 24px;
+		margin-left: 1rem;
+	}
+
+	.resTitle {
+		text-align: center;
+	}
+
+	.residents {
+		&::-webkit-scrollbar {
+			height: 70px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background-color: #e3f6f5;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-image: url("https://www.pngitem.com/pimgs/m/81-817458_transparent-rick-and-morty-png-rick-and-morty.png"),
+				linear-gradient(100deg, transparent, transparent);
+			background-position: center bottom, center -40px;
+			background-repeat: no-repeat, no-repeat;
+			background-size: contain, contain;
+			width: 70px;
+		}
+
+		list-style: none;
+		overflow-x: scroll;
+		max-width: 1200px;
+		display: flex;
+
+		.resident {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+	}
+
+	.residentsCount {
+		text-align: center;
+		font-size: 36px;
+		margin-top: 5px;
+		padding-bottom: 15px;
+	}
+}

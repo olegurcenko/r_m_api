@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from './scss/characterPage.module.scss'
+import { characterCardInfo } from "../charactersCardList/characterCard";
 
 export const CharacterPage: React.FC = () => {
-	const [data, setData] = useState<any>(null);
+	const [data, setData] = useState<characterCardInfo | null>(null);
+	const [locationId, setLocationId] = useState<string>('')
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -29,6 +31,12 @@ export const CharacterPage: React.FC = () => {
 				}
 				const result = await response.json();
 				setData(result);
+				if (result?.location?.url) {
+					const match = result.location.url.match(/\/(\d+)$/);
+					if (match) {
+						setLocationId(match[0].slice(1));
+					}
+				}
 				setLoading(false);
 			}
 			catch (error:any) {
@@ -39,6 +47,13 @@ export const CharacterPage: React.FC = () => {
 
 		fetchData()
 	}, [number])
+
+
+	//useEffect(() => {
+        
+    //}, [data]);
+
+
 	console.log(data)
 	return (
 		loading ? 
@@ -46,15 +61,15 @@ export const CharacterPage: React.FC = () => {
 			:
 			<section className={styles.fullPage}>
 				<section className={styles.topInfo}>
-					<img src={data.image} alt={data.name} />
+					<img src={data?.image} alt={data?.name} />
 					<ul className={styles.infoList}>
 						<li className={styles.mainInfo}>
-							<p className={styles.name}>{data.name}</p>
-							<Link className={styles.location} to={''}><img src="https://cdn-icons-png.flaticon.com/512/535/535239.png" alt="" />{data.location.name}</Link>
+							<p className={styles.name}>{data?.name}</p>
+							<Link className={styles.location} to={`/location/?id=${locationId}`}><img src="https://cdn-icons-png.flaticon.com/512/535/535239.png" alt="" />{data?.location?.name}</Link>
 						</li>
-						<li className={styles.species}>{data.species} {data.type === '' ? '' : data.type} {data.gender === 'Male' ? <img className={styles.gender} src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Male_symbol_-_black.png" alt={data.gender}/> : (data.gender === 'Female' ? <img className={styles.gender} src="https://static.vecteezy.com/system/resources/previews/024/044/538/original/women-sign-gender-free-png.png" alt={data.gender}/> : <></>)}</li>
-						<li className={styles.status}>{data.status === 'Alive' ? <p className={styles.alive}>Alive</p> : (data.status === 'Dead' ? <p className={styles.dead}>Dead</p> : <p className={styles.unknown}>Unknown</p>)}</li>
-						<li className={styles.origin}>{data.origin.name === 'unknown' ? <></> : `Origin: ${data.origin.name}`}</li>
+						<li className={styles.species}>{data?.species} {data?.type === '' ? '' : data?.type} {data?.gender === 'Male' ? <img className={styles.gender} src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Male_symbol_-_black.png" alt={data.gender}/> : (data?.gender === 'Female' ? <img className={styles.gender} src="https://static.vecteezy.com/system/resources/previews/024/044/538/original/women-sign-gender-free-png.png" alt={data.gender}/> : <></>)}</li>
+						<li className={styles.status}>{data?.status === 'Alive' ? <p className={styles.alive}>Alive</p> : (data?.status === 'Dead' ? <p className={styles.dead}>Dead</p> : <p className={styles.unknown}>Unknown</p>)}</li>
+						<li className={styles.origin}>{data?.origin?.name === 'unknown' ? <></> : `Origin: ${data?.origin?.name}`}</li>
 					</ul>
 				</section>
 			</section>

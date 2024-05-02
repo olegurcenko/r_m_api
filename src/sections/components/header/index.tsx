@@ -15,9 +15,9 @@ export const Header: React.FC = () => {
     const { pathname } = location;
 
     setActiveClasses({
-      characters: pathname === '/characters' ? styles.active : '',
-      locations: pathname === '/locations' ? styles.active : '',
-      episodes: pathname === '/episodes' ? styles.active : ''
+      characters: pathname === '/characters' || pathname === '/character' ? styles.active : '',
+      locations: pathname === '/locations' || pathname === '/location' ? styles.active : '',
+      episodes: pathname === '/episodes' || pathname === '/episode' ? styles.active : ''
     });
   }, [location]);
 
@@ -26,7 +26,7 @@ export const Header: React.FC = () => {
     	<section className={styles.headerWrapper}>
     	  <Link className={activeClasses.characters} to='/characters?page=1'>Characters</Link>
     	  <Link className={activeClasses.locations} to='/locations?page=1'>Locations</Link>
-    	  <Link className={activeClasses.episodes} to='/episodes'>Episodes</Link>
+    	  <Link className={activeClasses.episodes} to='/episodes?page=1'>Episodes</Link>
     	</section>
 	</section>
   );

@@ -6,6 +6,7 @@ import { Episodes } from "../sections/episodes";
 import { CharacterPage } from "../sections/characters/characterPage";
 import { LocationRender } from "../sections/locations/locationRequester";
 import { url } from "inspector";
+import { LocationPage } from "../sections/locations/locationPage";
 
 
 export const AppRouter: React.FC = () => {
@@ -15,6 +16,7 @@ export const AppRouter: React.FC = () => {
 			<Route path="/locations" element={<Locations/>}></Route>
 			<Route path="/episodes" Component={Episodes}></Route>
 			<Route path="/character" Component={CharacterPage}></Route>
+			<Route path="/location" Component={LocationPage}></Route>
 		</Routes>
 	)
 }

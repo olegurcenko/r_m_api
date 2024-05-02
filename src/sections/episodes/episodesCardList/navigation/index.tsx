@@ -22,13 +22,13 @@ export const NavigationBlock: React.FC<infoProps> = ({info}) => {
 	return (
 		<section className={styles.navigationBlock}>
 			{info.prev !== null ? 
-				<Link className={styles.navigateButton} to={`/characters?page=${number - 1}`}>{'<'}</Link>
+				<Link className={styles.navigateButton} to={`/episodes?page=${number - 1}`}>{'<'}</Link>
 			: 
 				<span className={styles.navigateButtonOff}>{'<'}</span>	
 			}
 			<p>{`${pageNumber}`}</p>
 			{info.next !== null ? 
-				<Link className={styles.navigateButton} to={`/characters?page=${number + 1}`}>{'>'}</Link>
+				<Link className={styles.navigateButton} to={`/episodes?page=${number + 1}`}>{'>'}</Link>
 			: 
 				<span className={styles.navigateButtonOff}>{'>'}</span>	
 			}

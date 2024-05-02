@@ -23,9 +23,8 @@
 	}
 }
 .fullPage {
-	//position: relative;
-	//top: 80px;
-	padding-top: 60px;
+	position: relative;
+	top: 70px;
 	max-width: 1200px;
 	margin-inline: auto;
 	background-color: #e3f6f5;
@@ -41,6 +40,7 @@
 			width: 100%;
 			max-width: 500px;
 			width: 100%;
+			padding-top: 10px;
 		}
 		.infoList {
 			list-style: none;

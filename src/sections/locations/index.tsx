@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LocationData, LocationRender } from "./locationRequester";
 import { useLocation } from "react-router-dom";
 import { NavigationLocationBlock } from "./navigation/navigation";
+import styles from './media/scss/locations.module.scss';
 
 interface ResultFromRequest {
     info: {
@@ -43,7 +44,7 @@ export const Locations: React.FC = () => {
     }, [number]);
 
     return (
-        <div>
+        <section className={styles.locationList}>
             {loading ? <p>Loading...</p> : (
                 error ? <p>Error: {error}</p> : (
                     data?.map((location) => (
@@ -52,6 +53,6 @@ export const Locations: React.FC = () => {
                 )
             )}
             <NavigationLocationBlock info={info} />
-        </div>
+        </section>
     );
 };
