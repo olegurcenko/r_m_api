@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { LocationData } from "../locationRequester";
 import { useLocation } from "react-router-dom";
 import { CharacterCard } from "../../characters/charactersCardList/characterCard";
-import styles from './scss/locationPage.module.scss'
+import styles from './scss/episodePage.module.scss'
+import { EpisodeFullInfo } from "../episodesCardList/episodeCard";
 import { ErrorsShow } from "../../../utils/errorShow";
 
-export const LocationPage: React.FC = () => {
-	const [data, setData] = useState<LocationData | null>(null);
+export const EpisodePage: React.FC = () => {
+	const [data, setData] = useState<EpisodeFullInfo | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 
@@ -25,17 +25,17 @@ export const LocationPage: React.FC = () => {
 		const locationData = async () => {
 			try {
 				setLoading(true);
-				const response = await fetch(`https://rickandmortyapi.com/api/location/${number}`);
+				const response = await fetch(`https://rickandmortyapi.com/api/episode/${number}`);
 				if (!response.ok) {
 					throw new Error('Failed to fetch data');
 				}
-				const result: LocationData = await response.json();
+				const result: EpisodeFullInfo = await response.json();
 				setData(result);
 			}
 			catch (error) {
 				const errorMessage = (error as Error).message;
                 setError(errorMessage || "An error occurred");
-			}
+                setLoading(false);			}
 			finally {
 				setLoading(false);
 			}
@@ -49,22 +49,22 @@ export const LocationPage: React.FC = () => {
 		error !== null ? 
 		<ErrorsShow message={error}/> :
 		<div>Loading</div> 
-		:
-		<section className={styles.locationPage}>
-			<h1 className={styles.planetName}>{data?.name}</h1>
-			<p className={styles.planetData}>{data?.type}</p>
-			<p className={styles.planetData}>{data?.dimension}</p>
-			<h3 className={styles.resTitle}>Residents</h3>
-			<section className={styles.residents}>
-			{data?.residents.map((resident, index) => {
+		: 
+		<section className={styles.episodePage}>
+			<h1 className={styles.episodeName}>{data?.name}</h1>
+			<p className={styles.episodeData}>{data?.episode}</p>
+			<p className={styles.episodeData}>{data?.air_date}</p>
+			<h3 className={styles.resTitle}>Characters:</h3>
+			<section className={styles.characters}>
+			{data?.characters.map((character, index) => {
 				return(
-					<li className={styles.resident} key={index}>
-						<CharacterCard url={resident} />
+					<li className={styles.character} key={index}>
+						<CharacterCard url={character} />
 					</li>
 				) 
 			})}
 			</section>
-			<h3 className={styles.residentsCount}>{data?.residents.length}</h3>
-		</section>
+			<h3 className={styles.residentsCount}>{data?.characters.length}</h3>
+			</section>
 	)
 }

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import styles from './scss/episodesCardList.module.scss'
 import { EpisodeCard, EpisodeFullInfo } from "./episodeCard";
 import { NavigationBlock } from "./navigation";
+import { ErrorsShow } from "../../../utils/errorShow";
 
 interface ResultFromRequestEpisodes {
 	info: {
@@ -35,8 +36,9 @@ export const EpisodesCardList: React.FC = () => {
                 const result: ResultFromRequestEpisodes = await response.json();
                 setData(result.results);
                 setInfo(result.info);
-            } catch (error:any) {
-                setError(error.message);
+            } catch (error) {
+                const errorMessage = (error as Error).message;
+                setError(errorMessage || "An error occurred");
             } finally {
                 setLoading(false);
             }
@@ -45,6 +47,11 @@ export const EpisodesCardList: React.FC = () => {
         fetchLocations();
     }, [number]);
 	return (
+        loading || error !== null ? 
+		error !== null ? 
+		<ErrorsShow message={error}/> :
+		<div>Loading</div> 
+		:
 		<section className={styles.cardList}>
 			{loading ? 
 				<div>loading</div> :	

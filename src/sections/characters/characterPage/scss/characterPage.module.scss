@@ -1,6 +1,7 @@
 @media screen and (max-width: 930px) {
 	.fullPage {
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		.topInfo {
 			img {
@@ -11,6 +12,7 @@
 			align-items: start;
 			.infoList {
 				padding: 0;
+				padding-left: 1rem;
 				.mainInfo {
 					display: flex;
 					flex-direction: column;
@@ -89,5 +91,43 @@
 				color: #272643c2;
 			}
 		}
+	}
+	.episodesTitle {
+		text-align: center;
+	}
+	.episodes {
+		&::-webkit-scrollbar {
+			height: 70px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background-color: #e3f6f5;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-image: url("https://www.pngitem.com/pimgs/m/81-817458_transparent-rick-and-morty-png-rick-and-morty.png"),
+				linear-gradient(100deg, transparent, transparent);
+			background-position: center bottom, center -40px;
+			background-repeat: no-repeat, no-repeat;
+			background-size: contain, contain;
+			width: 70px;
+		}
+
+		list-style: none;
+		overflow-x: scroll;
+		max-width: 1200px;
+		display: flex;
+
+		.episode {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+	}
+	.episodesCount {
+		text-align: center;
+		font-size: 36px;
+		margin-top: 5px;
+		padding-bottom: 15px;
 	}
 }

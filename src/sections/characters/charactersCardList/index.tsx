@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { CharacterCard, characterCardInfo } from "./characterCard";
 import styles from './scss/characterCardList.module.scss'
 import { NavigationBlock } from "../navigation";
+import { ErrorsShow } from "../../../utils/errorShow";
+import React from "react";
 
 interface ResultFromRequest {
 	info: {
@@ -16,14 +18,14 @@ interface ResultFromRequest {
 
 export const CharactersCardList: React.FC = () => {
 	const [info, setInfo] = useState<ResultFromRequest['info']>({prev: null, next: null});
-	const [data, setData] = useState<any>(null);
+	const [data, setData] = useState<characterCardInfo[] | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 
 
 
 	const location = useLocation();
-	let pageNumber: string | null = new URLSearchParams(location.search).get('page');
+	const pageNumber: string | null = new URLSearchParams(location.search).get('page');
 	let number: number = 0;	
 	if (pageNumber !== null) {
 	  const parsedNumber = parseInt(pageNumber);
@@ -46,8 +48,9 @@ export const CharactersCardList: React.FC = () => {
 
 				setLoading(false);
 			}
-			catch (error:any) {
-				setError(error.message as string);
+			catch (error) {
+				const errorMessage = (error as Error).message;
+				setError(errorMessage || "An error occurred");
 				setLoading(false);
 			}
 		};
@@ -55,9 +58,12 @@ export const CharactersCardList: React.FC = () => {
 		fetchData()
 	}, [number])
 
-	console.log(data)
-
 	return (
+		loading || error !== null ? 
+		error !== null ? 
+		<ErrorsShow message={error}/> :
+		<div>Loading</div> 
+		:
 		<section className={styles.cardList}>
 			{loading ? 
 				<div>loading</div> :	

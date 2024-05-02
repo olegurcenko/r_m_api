@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from './scss/characterCard.module.scss';
 import open from './media/open.png';
+import { ErrorsShow } from "../../../../utils/errorShow";
 
 export interface characterCardInfo {
     id: number;
@@ -46,8 +47,9 @@ export const CharacterCard: React.FC<PropsForCard> = ({ character, url }) => {
                     }
                     const result: characterCardInfo = await response.json();
                     setData(result);
-                } catch (error:any) {
-                    setError(error.message);
+                } catch (error) {
+                    const errorMessage = (error as Error).message;
+                    setError(errorMessage || "An error occurred");
                 } finally {
                     setLoading(false);
                 }
@@ -70,6 +72,11 @@ export const CharacterCard: React.FC<PropsForCard> = ({ character, url }) => {
     }
 
     return (
+        loading || error !== null ? 
+		error !== null ? 
+		<ErrorsShow message={error}/> :
+		<div>Loading</div> 
+		:
         <section className={styles.characterCard}>
             <span className={styles.infoBlock}>
                 {data.status && (

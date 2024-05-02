@@ -11,7 +11,7 @@ interface infoProps {
 
 export const NavigationBlock: React.FC<infoProps> = ({info}) => {
 	const location = useLocation();
-	let pageNumber: string | null = new URLSearchParams(location.search).get('page');
+	const pageNumber: string | null = new URLSearchParams(location.search).get('page');
 	let number: number = 0;	
 	if (pageNumber !== null) {
 	  const parsedNumber = parseInt(pageNumber);

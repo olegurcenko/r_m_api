@@ -35,8 +35,9 @@ export const EpisodeCard: React.FC<PropsForCard> = ({ episode, url }) => {
                     }
                     const result: EpisodeFullInfo = await response.json();
                     setData(result);
-                } catch (error:any) {
-                    setError(error.message);
+                } catch (error) {
+                    const errorMessage = (error as Error).message;
+                    setError(errorMessage || "An error occurred");
                 } finally {
                     setLoading(false);
                 }
@@ -59,10 +60,10 @@ export const EpisodeCard: React.FC<PropsForCard> = ({ episode, url }) => {
     }
 
     return (
-        <section className={styles.episodeCard}>
+        <Link to={`/episode/?id=${data.id}`} className={styles.episodeCard}>
 			<p className={styles.info}>{data.episode}</p>
 			<p className={styles.name}>{data.name}</p>
             <p className={styles.info}>{data.air_date}</p>
-        </section>
+        </Link>
     );
 };

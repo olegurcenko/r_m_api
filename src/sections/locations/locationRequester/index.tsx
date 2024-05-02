@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from './scss/locationRebder.module.scss';
 import { Link } from "react-router-dom";
+import { ErrorsShow } from "../../../utils/errorShow";
 
 interface LocationPorps {
 	url: string
@@ -44,6 +45,11 @@ export const LocationRender: React.FC<LocationPorps> = ({url}) => {
 	
 	console.log(data)
 	return (
+		loading || error !== null ? 
+		error !== null ? 
+		<ErrorsShow message={error}/> :
+		<div>Loading</div> 
+		:
 			<Link to={`/location?id=${data?.id}`} className={styles.cardLocation}>
 				{data?.name}
 			</Link>

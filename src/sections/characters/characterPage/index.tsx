@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from './scss/characterPage.module.scss'
 import { characterCardInfo } from "../charactersCardList/characterCard";
+import { EpisodeCard } from "../../episodes/episodesCardList/episodeCard";
+import { ErrorsShow } from "../../../utils/errorShow";
+import React from "react";
 
 export const CharacterPage: React.FC = () => {
 	const [data, setData] = useState<characterCardInfo | null>(null);
@@ -9,10 +12,8 @@ export const CharacterPage: React.FC = () => {
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 
-
-
 	const location = useLocation();
-	let pageNumber: string | null = new URLSearchParams(location.search).get('id');
+	const pageNumber: string | null = new URLSearchParams(location.search).get('id');
 	let number: number = 0;	
 	if (pageNumber !== null) {
 	  const parsedNumber = parseInt(pageNumber);
@@ -39,8 +40,9 @@ export const CharacterPage: React.FC = () => {
 				}
 				setLoading(false);
 			}
-			catch (error:any) {
-				setError(error.message as string);
+			catch (error) {
+				const errorMessage = (error as Error).message;
+				setError(errorMessage || "An error occurred");
 				setLoading(false);
 			}
 		};
@@ -48,17 +50,12 @@ export const CharacterPage: React.FC = () => {
 		fetchData()
 	}, [number])
 
-
-	//useEffect(() => {
-        
-    //}, [data]);
-
-
-	console.log(data)
 	return (
-		loading ? 
-			<div>Loading</div>
-			:
+		loading || error !== null ? 
+		error !== null ? 
+		<ErrorsShow message={error}/> :
+		<div>Loading</div> 
+		:
 			<section className={styles.fullPage}>
 				<section className={styles.topInfo}>
 					<img src={data?.image} alt={data?.name} />
@@ -72,6 +69,17 @@ export const CharacterPage: React.FC = () => {
 						<li className={styles.origin}>{data?.origin?.name === 'unknown' ? <></> : `Origin: ${data?.origin?.name}`}</li>
 					</ul>
 				</section>
+				<h2 className={styles.episodesTitle}>Episodes:</h2>
+				<section className={styles.episodes}>
+					{data?.episode?.map((episode, index) => {
+						return (
+							<li className={styles.episode} key={index}>
+								<EpisodeCard url={episode}/>
+							</li>
+					)
+					})}
+				</section>
+				<h3 className={styles.episodesCount}>{data?.episode?.length}</h3>
 			</section>
 	)
 }
